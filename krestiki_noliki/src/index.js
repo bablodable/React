@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
       return (
-        <button className="square" onClick={props.onClick}>
+        <button className="square" onClick={props.onClick} data-index={props.index}>
           {props.value}
         </button>
       );
@@ -16,6 +16,7 @@ function Square(props) {
       <Square 
        value={this.props.squares[i]}
        onClick={()  =>  this.props.onClick(i)}
+       index={i}
         />
       );
     }
@@ -85,7 +86,7 @@ function Square(props) {
       const winner = calculateWinner(current.squares);
       const moves = history.map((step, move) => {
         const desc = move ?
-          'Go in turn #' + move :
+          'Go in  turn #' + move + '  ' :
           'RESTART';
           return  (
             <li key={move}>
@@ -97,6 +98,8 @@ function Square(props) {
       let status;
       if (winner) {
         status = 'WINNER  ' + winner;
+      } else if (this.state.stepNumber === 9) {
+        status = 'Friends WINNERS';
       } else  {
         status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
       }
@@ -129,17 +132,21 @@ function Square(props) {
       [0, 4, 8],
       [2, 4, 6],
     ];
+
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+
+       document.body.querySelector('button[data-index="' + a + '"]').classList.add('win');
+       document.body.querySelector(`button[data-index="${b}"]`).classList.add('win');
+       document.body.querySelector(`button[data-index="${c}"]`).classList.add('win');
         return squares[a];
       }
-    }
-    return null;
+      }
+        return null;
   }
   
   // ========================================
   
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(<Game />);
-  
