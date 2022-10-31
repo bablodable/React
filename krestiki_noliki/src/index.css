@@ -19,6 +19,7 @@ body {
   
   .square {
     background: #fff;
+    background-color: rgb(236, 226, 226);
     border: 1px solid #999;
     float: left;
     font-size: 24px;
@@ -32,12 +33,18 @@ body {
     width: 34px;
   }
   
-  .square:focus {
-    outline: none;
+  .win {
+    background-color: red !important;
   }
   
+  .square:focus {
+    outline: none;
+    background: rgb(72, 23, 151);
+  }
+  
+  
   .kbd-navigation .square:focus {
-    background: #ddd;
+    background: rgb(246, 245, 248);
   }
   
   .game {
@@ -48,4 +55,3 @@ body {
   .game-info {
     margin-left: 20px;
   }
-  
